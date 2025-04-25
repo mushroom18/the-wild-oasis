@@ -7,8 +7,15 @@ export async function getBookings({ filter, sortBy }) {
     .select("*,cabins(name),guests(fullName,email)");
 
   //filter
-  if (filter !== null) {
+  if (filter) {
     query = query[filter.method || "eq"](filter.field, filter.value);
+  }
+
+  //sort
+  if (sortBy) {
+    query = query.order(sortBy.sortField, {
+      ascending: sortBy.order === "asc",
+    });
   }
 
   const { data, error } = await query;

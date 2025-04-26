@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import Checkbox from "../../ui/Checkbox";
 import { se } from "date-fns/locale";
 import { formatCurrency } from "../../utils/helpers";
+import { useCheckin } from "./useCheckin";
 
 const Box = styled.div`
   background-color: var(--color-grey-0);
@@ -28,6 +29,7 @@ function CheckinBooking() {
 
   useEffect(() => setConfirmPaid(booking?.isPaid ?? false), [booking.isPaid]);
   const moveBack = useMoveBack();
+  const { checkin, isCheckingIn } = useCheckin();
 
   if (isLoading) {
     return <Spinner />;
@@ -42,7 +44,10 @@ function CheckinBooking() {
     numNights,
   } = booking;
 
-  function handleCheckin() {}
+  function handleCheckin() {
+    if (!confirmPaid) return;
+    checkin(bookingId);
+  }
 
   return (
     <>

@@ -9,7 +9,7 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
   const sales = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
 
   const checkIns = confirmedStays.length;
-  console.log(checkIns);
+  //console.log(checkIns);
 
   const occupancyNights = confirmedStays.reduce(
     (acc, cur) => acc + cur.numNights,
